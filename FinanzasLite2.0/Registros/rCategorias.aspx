@@ -1,4 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rCategorias.aspx.cs" Inherits="FinanzasLite2._0.Registros.rCategorias" %>
+﻿<%@ Page Title="Categorias" 
+    Language="C#" 
+    MasterPageFile="~/Site.Master" 
+    AutoEventWireup="true" 
+    CodeBehind="rCategorias.aspx.cs" 
+    Inherits="FinanzasLite2._0.Registros.rCategorias" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="panel panel-primary">
@@ -6,7 +11,6 @@
 
         <div class="panel-body">
             <div class="form-horizontal col-md-12" role="form">
-
                 <%--CategoriaId--%>
                 <div class="form-group">
                     <label for="IdTextBox" class="col-md-3 control-label input-sm">Id: </label>
@@ -15,25 +19,22 @@
                     </div>
                     <div class="col-md-1 col-sm-2 col-xs-4">
                         <asp:LinkButton ID="BusquedaButton" CssClass="btn btn-info btn-block btn-md" data-toggle="modal" data-target="#myModal" CausesValidation="False" runat="server" Text="<span class='glyphicon glyphicon-search'></span>" PostBackUrl="~/Consultas/cCategorias.aspx" />
-
-                    </div>
-                    <div class="col-md-1">
                     </div>
                 </div>
-
-
                 <%--Descripcion--%>
                 <div class="form-group">
                     <label for="DescripcionTextBox" class="col-md-3 control-label input-sm">Descripcion</label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="DescripcionTextBox" runat="server" Class="form-control input-sm"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RFVDescripcion" runat="server" MaxLength="200" ControlToValidate="DescripcionTextBox" ErrorMessage="Campo Descripcion obligatorio" ForeColor="Red" Display="Dynamic" SetFocusOnError="True" ToolTip="Campo Descripcion obligatorio">Por favor llenar el campo Descripcion</asp:RequiredFieldValidator>
-
-                    </div>
-                    <div class="col-md-1">
+                        <asp:TextBox ID="DescripcionTextBox" runat="server" 
+                            Class="form-control input-sm"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RFVDescripcion" runat="server" MaxLength="200" 
+                            ControlToValidate="DescripcionTextBox" 
+                            ErrorMessage="Campo Descripcion obligatorio" ForeColor="Red" 
+                            Display="Dynamic" SetFocusOnError="True" 
+                            ToolTip="Campo Descripcion obligatorio">Por favor llenar el campo Descripcion
+                        </asp:RequiredFieldValidator>
                     </div>
                 </div>
-
                 <%--Tipo--%>
                 <div class="form-group">
                     <label for="TipoDropDownList" class="col-md-3 control-label input-sm">Tipo</label>
@@ -42,10 +43,7 @@
                             <asp:ListItem Selected="True">[Seleccione Uno]</asp:ListItem>
                         </asp:DropDownList>
                     </div>
-                    <div class="col-md-1">
-                    </div>
                 </div>
-
                 <%--Presupuesto--%>
                 <div class="form-group">
                     <label for="PresupuestoTextBox" class="col-md-3 control-label input-sm">Presupuesto</label>
@@ -54,12 +52,7 @@
                         <asp:RequiredFieldValidator ID="RFV_MontoTextBox" runat="server" ControlToValidate="PresupuestoTextBox" ErrorMessage="Campo presupuesto obligatorio" ForeColor="Red" Display="Dynamic" SetFocusOnError="True" ToolTip="Campo Monto obligatorio">Por favor llenar el campo Monto</asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="REV_MontoTextBox" runat="server" ControlToValidate="PresupuestoTextBox" ErrorMessage="No se permiten caracteres en el presupuesto" ForeColor="Red" Dynamic="true" SetFocusOnError="true" ValidationExpression="^(\d|-)?(\d|,)*\.?\d*$">Solo se permiten Números. </asp:RegularExpressionValidator>
                     </div>
-                    <div class="col-md-1">
-                    </div>
                 </div>
-
-
-
             </div>
 
             <div class="col-md-12">
@@ -73,7 +66,6 @@
             </div>
 
             <asp:Label ID="ErrorLabel" runat="server" Text=""></asp:Label>
-
         </div>
 
         <div class="panel-footer">

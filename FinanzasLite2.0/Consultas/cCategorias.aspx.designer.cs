@@ -13,6 +13,33 @@ namespace FinanzasLite2._0.Consultas {
     public partial class cCategorias {
         
         /// <summary>
+        /// BuscarPorDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList BuscarPorDropDownList;
+        
+        /// <summary>
+        /// FiltroTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FiltroTextBox;
+        
+        /// <summary>
+        /// BuscarButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BuscarButton;
+        
+        /// <summary>
         /// DatosGridView control.
         /// </summary>
         /// <remarks>

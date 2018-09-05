@@ -11,48 +11,6 @@ namespace FinanzasLite2._0.Registros
 {
     public partial class rCategorias : System.Web.UI.Page
     {
-        private void LlenaClase(Categorias categoria)
-        {
-            categoria.CategoriaId = Utils.ToInt(IdTextBox.Text);
-            categoria.Descripcion = DescripcionTextBox.Text;
-            categoria.Presupuesto = Utils.ToDecimal(PresupuestoTextBox.Text);
-            categoria.Tipo = (TiposTransacciones)Enum.Parse(typeof(TiposTransacciones), TipoDropDownList.SelectedValue);
-
-        }
-
-        private void LlenaCampos(Categorias categoria)
-        {
-            IdTextBox.Text = categoria.CategoriaId.ToString();
-            DescripcionTextBox.Text = categoria.Descripcion;
-            PresupuestoTextBox.Text = categoria.Presupuesto.ToString("N2");
-            TipoDropDownList.SelectedValue = Convert.ToInt16(categoria.Tipo).ToString();
-
-        }
-
-        private void Limpiar()
-        {
-            IdTextBox.Text = "";
-            DescripcionTextBox.Text = "";
-            PresupuestoTextBox.Text = "";
-            //TipoDropDownList.SelectedValue = "1";
-        }
-
-        void LlenarCombos()
-        {
-            TipoDropDownList.DataSource = Enum.GetValues(typeof(TiposTransacciones));
-            TipoDropDownList.DataBind();
-        }
-        void MostrarMensaje(TiposMensaje tipo, string mensaje)
-        {
-            ErrorLabel.Text = mensaje;
-
-            if (tipo == TiposMensaje.Success)
-                ErrorLabel.CssClass = "alert-success";
-            else
-                ErrorLabel.CssClass = "alert-danger";
-
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -62,11 +20,11 @@ namespace FinanzasLite2._0.Registros
                 //si llego in id
                 int id = Utils.ToInt(Request.QueryString["id"]);
                 if (id > 0)
-                { 
+                {
                     BLL.RepositorioBase<Categorias> repositorio = new BLL.RepositorioBase<Categorias>();
                     var categoria = repositorio.Buscar(id);
 
-                    if (categoria==null)
+                    if (categoria == null)
                     {
                         MostrarMensaje(TiposMensaje.Error, "Registro no encontrado");
                     }
@@ -74,7 +32,6 @@ namespace FinanzasLite2._0.Registros
                     {
                         LlenaCampos(categoria);
                     }
-
                 }
             }
         }
@@ -91,8 +48,8 @@ namespace FinanzasLite2._0.Registros
             bool paso = false;
 
             //todo: validaciones adicionales
-            LlenaClase(categoria);         
-           
+            LlenaClase(categoria);
+
             if (categoria.CategoriaId == 0)
                 paso = repositorio.Guardar(categoria);
             else
@@ -115,10 +72,47 @@ namespace FinanzasLite2._0.Registros
 
             var categoria = repositorio.Buscar(id);
 
-            if (categoria==null)
+            if (categoria == null)
                 MostrarMensaje(TiposMensaje.Error, "Registro no encontrado");
             else
                 repositorio.Eliminar(id);
+        }
+
+        private void LlenaClase(Categorias categoria)
+        {
+            categoria.CategoriaId = Utils.ToInt(IdTextBox.Text);
+            categoria.Descripcion = DescripcionTextBox.Text;
+            categoria.Presupuesto = Utils.ToDecimal(PresupuestoTextBox.Text);
+            categoria.Tipo = (TiposTransacciones)Enum.Parse(typeof(TiposTransacciones), TipoDropDownList.SelectedValue);
+
+        }
+        private void LlenaCampos(Categorias categoria)
+        {
+            IdTextBox.Text = categoria.CategoriaId.ToString();
+            DescripcionTextBox.Text = categoria.Descripcion;
+            PresupuestoTextBox.Text = categoria.Presupuesto.ToString("N2");
+            TipoDropDownList.SelectedValue = Convert.ToInt16(categoria.Tipo).ToString();
+        }
+        private void Limpiar()
+        {
+            IdTextBox.Text = "";
+            DescripcionTextBox.Text = "";
+            PresupuestoTextBox.Text = "";
+        }
+        void LlenarCombos()
+        {
+            TipoDropDownList.DataSource = Enum.GetValues(typeof(TiposTransacciones));
+            TipoDropDownList.DataBind();
+        }
+
+        void MostrarMensaje(TiposMensaje tipo, string mensaje)
+        {
+            ErrorLabel.Text = mensaje;
+
+            if (tipo == TiposMensaje.Success)
+                ErrorLabel.CssClass = "alert-success";
+            else
+                ErrorLabel.CssClass = "alert-danger";
         }
     }
 }

@@ -60,8 +60,8 @@ namespace BLL
             {
                 throw;
             }
-            return paso;
-        }
+            return paso;        }
+
         /// <summary>
         /// Permite Eliminar una entidad en la base de datos
         /// </summary>
@@ -69,26 +69,19 @@ namespace BLL
         /// <returns>Retorna True si Eliminó o Falso si falló </returns>
         public bool Eliminar(int id)
         {
-            bool paso = false;
-             
-            try
-            {
+            bool paso = false;             
+            try {
                 T entity = _contexto.Set<T>().Find(id);
-
                 _contexto.Set<T>().Remove(entity);
 
                 if (_contexto.SaveChanges() > 0)
-                {
                     paso = true;
-                }
+
                 _contexto.Dispose();
             }
             catch (Exception)
-            {
-                throw;
-            }
-            return paso;
-        }
+            {   throw; }
+            return paso;        }
 
         /// <summary>
         /// Permite Buscar una entidad en la base de datos
@@ -106,8 +99,7 @@ namespace BLL
             {
                 throw;
             }
-            return entity;
-        }
+            return entity;        }
 
         /// <summary>
         /// Permite extraer una lista de Personas de la base de datos
@@ -125,8 +117,7 @@ namespace BLL
             {
                 throw;
             }
-            return Lista;
-        }
+            return Lista;        }
 
         public void Dispose()
         {

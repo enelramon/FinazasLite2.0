@@ -10,22 +10,22 @@ namespace FinanzasLite2._0.Tests
         [TestMethod]
         public void Guardar()
         {
-            BLL.RepositorioBase<Categorias> repositorio = new BLL.RepositorioBase<Categorias>();
-            Categorias categoria = new Categorias();
-
-            //todo: validaciones adicionales
-            LlenaClase(categoria);
-
-            Assert.IsTrue(repositorio.Guardar(categoria));
+            BLL.RepositorioBase<Categorias> repositorio = 
+                new BLL.RepositorioBase<Categorias>();
+        
+            Assert.IsTrue(repositorio.Guardar(GetCategoria()));
         }
 
-        private void LlenaClase(Categorias categoria)
+        private Categorias GetCategoria()
         {
+            Categorias categoria = new Categorias();
+
             categoria.CategoriaId = 1;
             categoria.Descripcion = "Comida";
             categoria.Presupuesto = 1000;
             categoria.Tipo = TiposTransacciones.Salida;
 
+            return categoria;
         }
     }
 }
