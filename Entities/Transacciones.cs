@@ -15,21 +15,19 @@ namespace Entities
         public int CategoriaId { get; set; }
         public DateTime Fecha { get; set; }
         public string Descripcion { get; set; }
-        public int Tipo { get; set; }
+        public TiposTransacciones Tipo { get; set; }
         public decimal Monto { get; set; }
-
         public int DestinoId { get; set; }
 
         public Transacciones()
         {
-            this.TransaccionId = 0;
+            TransaccionId = 0;
             CuentaId = 0;
             CategoriaId = 0;
             Fecha = DateTime.Now;
             Descripcion = string.Empty;
-            Tipo = 0;
+            Tipo = TiposTransacciones.Entrada;
             Monto = 0;
-
             DestinoId = 0;
         }
     } 
