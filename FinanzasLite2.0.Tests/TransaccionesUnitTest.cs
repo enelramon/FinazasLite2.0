@@ -1,6 +1,8 @@
 ﻿using System;
 using Entities;
+
 using BLL;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FinanzasLite2._0.Tests
@@ -27,6 +29,15 @@ namespace FinanzasLite2._0.Tests
         {
             TransaccionBLL rep = new TransaccionBLL();
             Assert.IsTrue(rep.Eliminar(2));
+
+            BLL.RepositorioBase<Transacciones> repositorio =
+                new BLL.RepositorioBase<Transacciones>();
+
+            //todo: Cuando se guarde la transaccion debe descontar 
+            //el presupuesto de la categoria. Guardar, Modificar, Eliminar
+
+            Assert.IsTrue(repositorio.Guardar(GetTransaccion()));
+
         }
 
         private Transacciones GetTransaccion()
@@ -42,6 +53,8 @@ namespace FinanzasLite2._0.Tests
             transaccion.DestinoId = 1;
 
             return transaccion;
+
+            
         }
     }
 }

@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 
 namespace FinanzasLite2._0.Utilitarios
 {
-    public class Utils
+    public static class Utils
     {
         public static int ToInt(string valor)
         {
@@ -23,6 +24,10 @@ namespace FinanzasLite2._0.Utilitarios
 
             return retorno;
         }
-
+        public static void ShowToastr(this Page page, string message, string title, string type = "info")
+        {
+            page.ClientScript.RegisterStartupScript(page.GetType(), "toastr_message",
+                  String.Format("toastr.{0}('{1}', '{2}');", type.ToLower(), message, title), addScriptTags: true);
+        }
     }
 }
