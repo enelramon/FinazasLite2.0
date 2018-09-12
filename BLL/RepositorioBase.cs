@@ -60,7 +60,8 @@ namespace BLL
             {
                 throw;
             }
-            return paso;        }
+            return paso;
+        }
 
         /// <summary>
         /// Permite Eliminar una entidad en la base de datos
@@ -81,7 +82,8 @@ namespace BLL
             }
             catch (Exception)
             {   throw; }
-            return paso;        }
+            return paso;
+        }
 
         /// <summary>
         /// Permite Buscar una entidad en la base de datos
@@ -99,7 +101,8 @@ namespace BLL
             {
                 throw;
             }
-            return entity;        }
+            return entity;
+        }
 
         /// <summary>
         /// Permite extraer una lista de Personas de la base de datos
@@ -117,7 +120,8 @@ namespace BLL
             {
                 throw;
             }
-            return Lista;        }
+            return Lista;
+        }
 
         public void Dispose()
         {

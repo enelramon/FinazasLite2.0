@@ -51,6 +51,7 @@
     <Compile Include="PresupuestosRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositorioBase.cs" />
+    <Compile Include="TransaccionBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
@@ -58,7 +59,11 @@
       <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
+
+      <Project>{c3d6d288-eca1-42ac-a248-4e5c42317a35}</Project>
+
       <Project>{C3D6D288-ECA1-42AC-A248-4E5C42317A35}</Project>
+
       <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>

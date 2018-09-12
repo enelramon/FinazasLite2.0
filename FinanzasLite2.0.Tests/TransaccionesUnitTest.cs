@@ -1,5 +1,8 @@
 ﻿using System;
 using Entities;
+
+using BLL;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FinanzasLite2._0.Tests
@@ -10,6 +13,23 @@ namespace FinanzasLite2._0.Tests
         [TestMethod]
         public void Guardar()
         {
+            TransaccionBLL rep = new TransaccionBLL();
+            Assert.IsTrue(rep.Guardar(GetTransaccion()));
+        }
+
+        [TestMethod]
+        public void Modificar()
+        {
+            TransaccionBLL rep = new TransaccionBLL();
+            Assert.IsTrue(rep.Modificar(GetTransaccion()));
+        }
+
+        [TestMethod]
+        public void Eliminar()
+        {
+            TransaccionBLL rep = new TransaccionBLL();
+            Assert.IsTrue(rep.Eliminar(2));
+
             BLL.RepositorioBase<Transacciones> repositorio =
                 new BLL.RepositorioBase<Transacciones>();
 
@@ -17,21 +37,24 @@ namespace FinanzasLite2._0.Tests
             //el presupuesto de la categoria. Guardar, Modificar, Eliminar
 
             Assert.IsTrue(repositorio.Guardar(GetTransaccion()));
+
         }
 
         private Transacciones GetTransaccion()
         {
-            return new Transacciones()
-            {
-                TransaccionId = 0,
-                CuentaId = 1,
-                CategoriaId = 1,
-                Fecha = DateTime.Now,
-                Descripcion = "gastos",
-                Tipo = (int)TiposTransacciones.Salida,
-                Monto = 100,
-                DestinoId = 0
-            };
+            Transacciones transaccion = new Transacciones();
+            transaccion.TransaccionId = 2;
+            transaccion.CuentaId = 1;
+            transaccion.CategoriaId = 1;
+            transaccion.Fecha = DateTime.Now;
+            transaccion.Descripcion = "Descripcion";
+            transaccion.Tipo = TiposTransacciones.Entrada;
+            transaccion.Monto = 300;
+            transaccion.DestinoId = 1;
+
+            return transaccion;
+
+            
         }
     }
 }
