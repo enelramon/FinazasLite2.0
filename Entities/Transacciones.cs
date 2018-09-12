@@ -22,7 +22,7 @@ namespace Entities
 
         public Transacciones()
         {
-            this.TransaccionId = 0;
+            TransaccionId = 0;
             CuentaId = 0;
             CategoriaId = 0;
             Fecha = DateTime.Now;

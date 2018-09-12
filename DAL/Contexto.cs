@@ -10,6 +10,8 @@ namespace DAL
     public class Contexto : DbContext
     {
         public DbSet<Categorias> Categorias { get; set; }
+        public DbSet<TiposEgresos> TiposEgresos { get; set; }
+        public DbSet<Presupuestos> Presupuestos { get; set; }
         public Contexto() : base("ConStr")
         {
 

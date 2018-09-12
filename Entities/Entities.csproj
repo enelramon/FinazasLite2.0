@@ -44,7 +44,10 @@
     <Compile Include="Categorias.cs" />
     <Compile Include="Cuentas.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Presupuestos.cs" />
+    <Compile Include="PresupuestosDetalle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TiposEgresos.cs" />
     <Compile Include="Transacciones.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
