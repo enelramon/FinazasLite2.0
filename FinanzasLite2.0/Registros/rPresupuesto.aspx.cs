@@ -28,7 +28,7 @@ namespace FinanzasLite2._0.Registros
         }
         protected void BindGrid()
         {
-            DetalleGridView.DataSource = (Presupuestos)ViewState["Presupuesto"];
+            DetalleGridView.DataSource = ((Presupuestos)ViewState["Presupuesto"]).Detalle;
             DetalleGridView.DataBind();
         }
 
@@ -122,7 +122,7 @@ namespace FinanzasLite2._0.Registros
             Presupuestos presupuesto = new Presupuestos();
             PresupuestosRepositorio repositorio = new PresupuestosRepositorio();
 
-            if (repositorio.Eliminar(Convert.ToInt32(PresupuestoTextBox.Text))
+            if (repositorio.Eliminar(Convert.ToInt32(PresupuestoTextBox.Text)))
             {
 
                 Utilitarios.Utils.ShowToastr(this, "Registro eliminado", "Exito", "success");

@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-   public class PresupuestosDetalle
+    [Serializable]
+    public class PresupuestosDetalle
     {
         [Key]
         public int Id { get; set; }

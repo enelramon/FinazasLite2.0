@@ -7,7 +7,7 @@ using System.Web.UI;
 
 namespace FinanzasLite2._0.Utilitarios
 {
-    public class Utils
+    public static class Utils
     {
         public static int ToInt(string valor)
         {

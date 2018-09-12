@@ -18,7 +18,7 @@ namespace BLL
             {
                 presupuesto = _contexto.Presupuestos.Find(id);
 
-                presupuesto.Detalle.Count();//Cargar la lista en este punto porque                //luego de hacer Dispose() el Contexto                 //no sera posible leer la lista
+                presupuesto.Detalle.Count();//Cargar la lista en este punto porque         //luego de hacer Dispose() el Contexto           //no sera posible leer la lista
 
                 foreach (var item in presupuesto.Detalle)//Cargar los nombres de las ciudades            
                 { string s = item.TipoEgreso.Descripcion; } //forzando la ciudad a cargarse
@@ -42,7 +42,8 @@ namespace BLL
                 //recorrer el detalle
                 foreach (var item in presupuesto.Detalle)
                 {
-                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added; //Muy importante indicar que pasara con la entidad del detalle
+                    //Muy importante indicar que pasara con la entidad del detalle
+                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added; 
                     _contexto.Entry(item).State = estado;
                 }
 
