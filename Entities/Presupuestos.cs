@@ -34,5 +34,15 @@ namespace Entities
             this.Detalle.Add(new PresupuestosDetalle(id,presupuestoId,tipoEgresoId,monto));
         }
 
+        public void AgregarDetalle(int id, int presupuestoId, string tipoEgresoId, string monto)
+        {
+            decimal MontoConvertido = 0;
+            decimal.TryParse(monto, out MontoConvertido);
+
+            int tipoEgresoIdConvertido = 0;
+            int.TryParse(tipoEgresoId, out tipoEgresoIdConvertido);
+
+            this.AgregarDetalle(id,presupuestoId, tipoEgresoIdConvertido, MontoConvertido);
+        }
     }
 }
