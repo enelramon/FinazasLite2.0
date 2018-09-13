@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class PresupuestosRepositorio: RepositorioBase<Presupuestos>
+    public class PresupuestosRepositorio : RepositorioBase<Presupuestos>
     {
 
         public override Presupuestos Buscar(int id)
@@ -37,13 +37,22 @@ namespace BLL
             bool paso = false;
             try
             {
-                //todo: buscar las entidades que no estan para removerlas
+                //buscar las entidades que no estan para removerlas
+                var Anterior = _contexto.Presupuestos.Find(presupuesto.PresupuestoId);
+                foreach (var item in Anterior.Detalle)
+                {
+                    if (!presupuesto.Detalle.Exists(d => d.Id == item.Id))
+                    {
+                        item.TipoEgreso = null;
+                        _contexto.Entry(item).State = EntityState.Deleted;
+                    }
+                }
 
                 //recorrer el detalle
                 foreach (var item in presupuesto.Detalle)
                 {
                     //Muy importante indicar que pasara con la entidad del detalle
-                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added; 
+                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added;
                     _contexto.Entry(item).State = estado;
                 }
 

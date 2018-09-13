@@ -32,7 +32,6 @@ namespace FinanzasLite2._0.Registros
             DetalleGridView.DataBind();
         }
 
-
         public Presupuestos LlenarClase()
         {
             Presupuestos Presupuesto = new Presupuestos();
@@ -53,35 +52,6 @@ namespace FinanzasLite2._0.Registros
 
             this.BindGrid();
         }
-        protected void BuscarButton_Click(object sender, EventArgs e)
-        {
-            PresupuestosRepositorio repositorio = new PresupuestosRepositorio();
-
-            var Presupuesto = repositorio.Buscar(Utilitarios.Utils.ToInt(PresupuestoTextBox.Text));
-            if (Presupuesto != null)
-            {
-                LlenarCampos(Presupuesto);
-                Utilitarios.Utils.ShowToastr(this, "Busqueda exitosa", "Exito");
-            }
-            else
-            {
-                Limpiar();
-                Utilitarios.Utils.ShowToastr(this, "No se pudo encontrar el presupuesto especificado", "Error", "error");
-            }
-        }
-        protected void AgregarButton_Click(object sender, EventArgs e)
-        {
-            Presupuestos Presupuesto = new Presupuestos();
-
-            Presupuesto = (Presupuestos)ViewState["Presupuesto"];
-            Presupuesto.AgregarDetalle(0, Presupuesto.PresupuestoId, TipoEgresoDropDownList.SelectedValue, MontoTextBox.Text);
-
-            ViewState["Presupuesto"] = Presupuesto;
-
-            this.BindGrid();
-            MontoTextBox.Text = "";
-        }
-
         protected void Limpiar()
         {
             PresupuestoTextBox.Text = "";
@@ -90,6 +60,39 @@ namespace FinanzasLite2._0.Registros
             MontoTextBox.Text = "";
             ViewState["Presupuesto"] = new Presupuestos();
             this.BindGrid();
+        }
+
+        protected void BuscarButton_Click(object sender, EventArgs e)
+        {
+            PresupuestosRepositorio repositorio = new PresupuestosRepositorio();
+
+            var Presupuesto = repositorio.Buscar(
+                Utilitarios.Utils.ToInt(PresupuestoTextBox.Text));
+            if (Presupuesto != null)
+            {
+                LlenarCampos(Presupuesto);
+                Utilitarios.Utils.ShowToastr(this, "Busqueda exitosa", "Exito");
+            }
+            else
+            {
+                Limpiar();
+                Utilitarios.Utils.ShowToastr(this,
+                    "No se pudo encontrar el presupuesto especificado",
+                    "Error", "error");
+            }
+        }
+        protected void AgregarButton_Click(object sender, EventArgs e)
+        {
+            Presupuestos Presupuesto = new Presupuestos();
+
+            Presupuesto = (Presupuestos)ViewState["Presupuesto"];
+            Presupuesto.AgregarDetalle(0, Presupuesto.PresupuestoId,
+                    TipoEgresoDropDownList.SelectedValue, MontoTextBox.Text);
+
+            ViewState["Presupuesto"] = Presupuesto;
+
+            this.BindGrid();
+            MontoTextBox.Text = "";
         }
 
         protected void LimpiarButton_Click(object sender, EventArgs e)
