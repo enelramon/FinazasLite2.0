@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using DAL;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,8 +9,40 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class PresupuestosRepositorio: RepositorioBase<Presupuestos>
+    public class PresupuestosRepositorio : RepositorioBase<Presupuestos>
     {
+        public override bool Guardar(Presupuestos entity)
+        {
+
+            bool paso = false;
+            _contexto = new DAL.Contexto();
+            try
+            {
+                if (AcumularEgreso(entity.Detalle) && base.Guardar(entity))
+                    paso = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return paso;
+        }
+
+        private bool AcumularEgreso(List<PresupuestosDetalle> Detalle)
+        {
+            bool paso = false;
+            BLL.RepositorioBase<TiposEgresos> contexto = new BLL.RepositorioBase<TiposEgresos>();
+            foreach (var item in Detalle)
+            {
+                var egreso = contexto.Buscar(item.TipoEgresoId);
+                egreso.Acumulado += item.Monto;
+                contexto.Modificar(egreso);
+                paso = true;
+            }
+
+            return paso;
+
+        }
 
         public override Presupuestos Buscar(int id)
         {
@@ -43,7 +76,7 @@ namespace BLL
                 foreach (var item in presupuesto.Detalle)
                 {
                     //Muy importante indicar que pasara con la entidad del detalle
-                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added; 
+                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added;
                     _contexto.Entry(item).State = estado;
                 }
 
@@ -57,6 +90,45 @@ namespace BLL
             {
                 throw;
             }
+            return paso;
+        }
+
+        public override bool Eliminar(int id)
+        {
+            bool paso = false;
+            _contexto = new Contexto();
+            var presupuesto = _contexto.Presupuestos.Find(id);
+            presupuesto.Detalle.Count();
+            try
+            {
+               
+                foreach (var item in presupuesto.Detalle)
+                {
+                    item.TipoEgreso = null;
+                }
+                
+                if(EliminarAcumulado(presupuesto.Detalle) && base.Eliminar(id))
+                    paso = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return paso;
+        }
+
+        private bool EliminarAcumulado(List<PresupuestosDetalle> Detalle)
+        {
+            bool paso = false;
+            BLL.RepositorioBase<TiposEgresos> contexto = new BLL.RepositorioBase<TiposEgresos>();
+            foreach (var item in Detalle)
+            {
+                var egreso = contexto.Buscar(item.TipoEgresoId);
+                egreso.Acumulado -= item.Monto;
+                contexto.Modificar(egreso);
+                paso = true;
+            }
+
             return paso;
         }
 
