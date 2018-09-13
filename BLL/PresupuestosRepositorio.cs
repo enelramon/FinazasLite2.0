@@ -71,7 +71,16 @@ namespace BLL
             bool paso = false;
             try
             {
-                //todo: buscar las entidades que no estan para removerlas
+                //buscar las entidades que no estan para removerlas
+                var Anterior = _contexto.Presupuestos.Find(presupuesto.PresupuestoId);
+                foreach (var item in Anterior.Detalle)
+                {
+                    if (!presupuesto.Detalle.Exists(d => d.Id == item.Id))
+                    {
+                        item.TipoEgreso = null;
+                        _contexto.Entry(item).State = EntityState.Deleted;
+                    }
+                }
 
                 //recorrer el detalle
                 foreach (var item in presupuesto.Detalle)
