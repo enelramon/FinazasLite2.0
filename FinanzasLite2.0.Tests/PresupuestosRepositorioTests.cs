@@ -25,7 +25,7 @@ namespace BLL.Tests
             Presupuestos presupuestos = new Presupuestos();
             presupuestos.Descripcion = "Prueba";
             presupuestos.PresupuestoId = 0;
-            presupuestos.AgregarDetalle(0, 0, 4, 500);
+            presupuestos.AgregarDetalle(0, 0, 5, 500);
             return presupuestos;
         }
 

@@ -18,6 +18,7 @@ namespace BLL
             _contexto = new DAL.Contexto();
             try
             {
+              
                 if (AcumularEgreso(entity.Detalle) && base.Guardar(entity))
                     paso = true;
             }
@@ -101,13 +102,13 @@ namespace BLL
             presupuesto.Detalle.Count();
             try
             {
-               
+
                 foreach (var item in presupuesto.Detalle)
                 {
                     item.TipoEgreso = null;
                 }
-                
-                if(EliminarAcumulado(presupuesto.Detalle) && base.Eliminar(id))
+
+                if (EliminarAcumulado(presupuesto.Detalle) && base.Eliminar(id))
                     paso = true;
             }
             catch (Exception)
