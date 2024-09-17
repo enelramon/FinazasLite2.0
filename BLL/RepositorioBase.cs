@@ -21,10 +21,10 @@ namespace BLL
         /// </summary>
         /// <param name="entity">Una instancia de la entidad a guardar</param>
         /// <returns>Retorna True si guardo o Falso si falló </returns>
-        public bool Guardar(T entity)
+        public virtual bool Guardar(T entity)
         {
             bool paso = false;
-
+            _contexto = new Contexto();
             try
             {
                 if (_contexto.Set<T>().Add(entity) != null)
@@ -47,6 +47,7 @@ namespace BLL
         /// <returns>Retorna True si Modifico o Falso si falló </returns>
         public virtual bool Modificar(T entity)
         {
+            _contexto = new Contexto();
             bool paso = false; 
             try
             {
@@ -67,8 +68,9 @@ namespace BLL
         /// </summary>
         ///<param name="id">El Id de la entidad que se desea eliminar </param>
         /// <returns>Retorna True si Eliminó o Falso si falló </returns>
-        public bool Eliminar(int id)
+        public virtual bool Eliminar(int id)
         {
+            _contexto = new Contexto();
             bool paso = false;             
             try {
                 T entity = _contexto.Set<T>().Find(id);
@@ -89,7 +91,8 @@ namespace BLL
         ///<param name="id">El Id de la entidad que se desea encontrar </param>
         /// <returns>Retorna la persona encontrada </returns>
         public virtual T Buscar(int id)
-        { 
+        {
+            _contexto = new Contexto();
             T entity  ;
             try
             {
